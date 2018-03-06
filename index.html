@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock Paper Scissors</title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+	  
+	<div class="container">
+		<div class="page-header text-center">
+    	<h1>Rock Paper Scissors</h1>
+    	<p>Challenge your friends to this classic game with a modern twist!</p>      
+  	</div>
+	  <div class="row">
+	    <div class="col-sm-4">
+	    	<div class="panel panel-default">
+	    		<div class="panel-heading text-center player-1">Player 1</div>
+	      		<div class="panel-body">
+	      			<div class="row">
+	      				<div class="col-sm-6"><img id="rock" class="img-responsive center-block" src="assets/images/rock.png"></div>
+	      				<div class="col-sm-6"><img id="paper" class="img-responsive center-block" src="assets/images/paper.png"></div>
+	      			</div>
+	      			<div class="row">
+	      				<div class="col-sm-3"></div>
+	      				<div class="col-sm-6"><img id="scissors" class="img-responsive center-block" src="assets/images/scissors.png"></div>
+	      				<div class="col-sm-3"></div>
+	      			</div>
+	      		</div>
+	  		</div>
+	    </div>
+	    <div class="col-sm-4">
+	      <div class="panel panel-default">
+	      	<div class="panel-heading text-center">Result:</div>	
+	      		<div class="panel-body">
+	      		</div>
+	  		</div>
+	    </div>
+	    <div class="col-sm-4">
+	      <div class="panel panel-default">
+	      		<div class="panel-heading text-center player-2">Player 2</div>	
+	      		<div class="panel-body">
+	      			<div class="row">
+	      				<div class="col-sm-6"><img id="rock" class="img-responsive center-block" src="assets/images/rock.png"></div>
+	      				<div class="col-sm-6"><img id="paper" class="img-responsive center-block" src="assets/images/paper.png"></div>
+	      			</div>
+	      			<div class="row">
+	      				<div class="col-sm-3"></div>
+	      				<div class="col-sm-6"><img id="scissors" class="img-responsive center-block" src="assets/images/scissors.png"></div>
+	      				<div class="col-sm-3"></div>
+	      			</div>
+	      		</div>
+	  		</div>
+	    </div>
+	  </div>
+
+    <div class="row">
+    	<div class="panel panel-default">
+    		<div class="panel-heading text-center">RESULTS:</div>
+      		<div class="panel-body">
+      			<h4><b>You Chose: </b><span id="user-choice"></span></h1>
+      			<h4><b>Computer Chose: </b><span id="computer-choice"></span></h1>
+      			<h4><b>Wins: </b><span id="wins-area"></span></h1>
+      			<h4><b>Losses: </b><span id="losses-area"></span></h1>
+      			<h4><b>Ties: </b><span id="ties-area"></span></h1>
+      		</div>
+  		</div>
+    </div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<script src="assets/javascript/javascript.js"></script>
+</body>
+</html>
