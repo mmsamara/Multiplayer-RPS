@@ -11,67 +11,128 @@
 
 // var database = firebase.database();
 
-var userChoice;
-var choiceArray = ["r", "p", "s"];
-var computerChoice;
-var wins = 0;
-var losses = 0;
+var playerOneChoice = null;
+var playerOneWins = 0;
+var playerOneLosses = 0;
+
+var playerTwoChoice = null;
+var playerTwoWins = 0;
+var playerTwoLosses = 0;
 var ties = 0;
 
+//var choiceArray=["r","p","s"];
+//var computerChoice;
+
 $("#rock").on("click", function() {
-	userChoice = "r";
-	checkGame(userChoice);
-	updateResult();
+	playerOneChoice = "r";
+	checkGame(playerOneChoice);
+	if(playerTwoChoice != null) {
+		updateResult();		
+	}
 })
 
 $("#paper").on("click", function() {
-	userChoice = "p";
-	checkGame(userChoice);
-	updateResult();
+	playerOneChoice = "p";
+	checkGame(playerOneChoice);
+	if(playerTwoChoice != null) {
+		updateResult();		
+	}
 })
 
 $("#scissors").on("click", function() {
-	userChoice = "s";
-	checkGame(userChoice);
-	updateResult();
+	playerOneChoice = "s";
+	checkGame(playerOneChoice);
+	if(playerTwoChoice != null) {
+		updateResult();		
+	}
 })
 
-function checkGame(userChoice) {
-	computerChoice = choiceArray[Math.floor(Math.random()*choiceArray.length)];
+$("#rock2").on("click", function() {
+	playerTwoChoice = "r";
+	checkGame(playerOneChoice);
+	if(playerOneChoice != null) {
+		updateResult();		
+	}
+})
 
-	if (userChoice === computerChoice) {
+$("#paper2").on("click", function() {
+	playerTwoChoice = "p";
+	checkGame(playerOneChoice);
+	if(playerOneChoice != null) {
+		updateResult();		
+	}
+})
+
+$("#scissors2").on("click", function() {
+	playerTwoChoice = "s";
+	checkGame(playerOneChoice);
+	if(playerOneChoice != null) {
+		updateResult();		
+	}
+})
+
+function checkGame(playerOneChoice) {
+	//computerChoice = choiceArray[Math.floor(Math.random()*choiceArray.length)];
+
+	if (playerOneChoice === playerTwoChoice) {
 		ties++;
-	} else if (userChoice==="r" && computerChoice==="p") {
-		losses++;
-	} else if (userChoice==="r" && computerChoice==="s") {
-		wins++;
-	} else if (userChoice==="p" && computerChoice==="s") {
-		losses++;
-	} else if (userChoice==="p" && computerChoice==="r") {
-		wins++;
-	} else if (userChoice==="s" && computerChoice==="r") {
-		losses++;
-	} else if (userChoice==="s" && computerChoice==="p") {
-		wins++;
+	} else if (playerOneChoice==="r" && playerTwoChoice==="p") {
+		playerOneLosses++;
+		playerTwoWins++;
+	} else if (playerOneChoice==="r" && playerTwoChoice==="s") {
+		playerOneWins++;
+		playerTwoLosses++;
+	} else if (playerOneChoice==="p" && playerTwoChoice==="s") {
+		playerOneLosses++;
+		playerTwoWins++;
+	} else if (playerOneChoice==="p" && playerTwoChoicee==="r") {
+		playerOneWins++;
+		playerTwoLosses++;
+	} else if (playerOneChoice==="s" && playerTwoChoice==="r") {
+		playerOneLosses++;
+		playerTwoWins++;
+	} else if (playerOneChoice==="s" && playerTwoChoice==="p") {
+		playerOneWins++;
+		playerTwoLosses++;
 	} 
 }
 
 function updateResult() {
-	if (userChoice==="r") {
-		$("#user-choice").text("Rock");
-	} else if (userChoice==="p") {
-		$("#user-choice").text("Paper");
-	} else if (userChoice==="s") {
-		$("#user-choice").text("Scissors");
+	if (playerOneChoice==="r") {
+		$("#p1-choice").text("Rock");
+	} else if (playerOneChoice==="p") {
+		$("#p1-choice").text("Paper");
+	} else if (playerOneChoice==="s") {
+		$("#p1-choice").text("Scissors");
 	}
-	if (computerChoice==="r") {
-		$("#computer-choice").text("Rock");
-	} else if (computerChoice==="p") {
-		$("#computer-choice").text("Paper");
-	} else if (computerChoice==="s") {
-		$("#computer-choice").text("Scissors");
+	if (playerTwoChoice==="r") {
+		$("#p2-choice").text("Rock");
+	} else if (playerTwoChoice==="p") {
+		$("#p2-choice").text("Paper");
+	} else if (playerTwoChoice==="s") {
+		$("#p2-choice").text("Scissors");
 	}
-	$("#wins-area").text(wins);
-	$("#losses-area").text(losses);
+
+	$("#p1wins-area").text(playerOneWins);
+	$("#p1losses-area").text(playerOneLosses);
 	$("#ties-area").text(ties);
+	$("#p2wins-area").text(playerTwoWins);
+	$("#p2losses-area").text(playerTwoLosses);
+	$("#ties-area").text(ties);
+
+	if (playerOneChoice === playerTwoChoice) {
+		ties++;
+	} else if (playerOneChoice==="r" && playerTwoChoice==="p") {
+		$("#result-area").html("<h1>Player Two Wins!</h1>");
+	} else if (playerOneChoice==="r" && playerTwoChoice==="s") {
+		$("#result-area").html("<h1>Player One Wins!</h1>");
+	} else if (playerOneChoice==="p" && playerTwoChoice==="s") {
+		$("#result-area").html("<h1>Player Two Wins!</h1>");
+	} else if (playerOneChoice==="p" && playerTwoChoicee==="r") {
+		$("#result-area").html("<h1>Player One Wins!</h1>");
+	} else if (playerOneChoice==="s" && playerTwoChoice==="r") {
+		$("#result-area").html("<h1>Player Two Wins!</h1>");
+	} else if (playerOneChoice==="s" && playerTwoChoice==="p") {
+		$("#result-area").html("<h1>Player One Wins!</h1>");
+	} 
 }
