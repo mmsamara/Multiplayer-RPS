@@ -27,7 +27,8 @@ $("#rock").on("click", function() {
 	playerOneChoice = "r";
 	checkGame(playerOneChoice);
 	if(playerTwoChoice != null) {
-		updateResult();		
+		updateResult();
+		initializeRound();		
 	}
 })
 
@@ -35,7 +36,8 @@ $("#paper").on("click", function() {
 	playerOneChoice = "p";
 	checkGame(playerOneChoice);
 	if(playerTwoChoice != null) {
-		updateResult();		
+		updateResult();
+		initializeRound();		
 	}
 })
 
@@ -43,7 +45,8 @@ $("#scissors").on("click", function() {
 	playerOneChoice = "s";
 	checkGame(playerOneChoice);
 	if(playerTwoChoice != null) {
-		updateResult();		
+		updateResult();
+		initializeRound();		
 	}
 })
 
@@ -51,7 +54,8 @@ $("#rock2").on("click", function() {
 	playerTwoChoice = "r";
 	checkGame(playerOneChoice);
 	if(playerOneChoice != null) {
-		updateResult();		
+		updateResult();
+		initializeRound();		
 	}
 })
 
@@ -59,7 +63,8 @@ $("#paper2").on("click", function() {
 	playerTwoChoice = "p";
 	checkGame(playerOneChoice);
 	if(playerOneChoice != null) {
-		updateResult();		
+		updateResult();
+		initializeRound();		
 	}
 })
 
@@ -67,7 +72,8 @@ $("#scissors2").on("click", function() {
 	playerTwoChoice = "s";
 	checkGame(playerOneChoice);
 	if(playerOneChoice != null) {
-		updateResult();		
+		updateResult();	
+		initializeRound();	
 	}
 })
 
@@ -85,7 +91,7 @@ function checkGame(playerOneChoice) {
 	} else if (playerOneChoice==="p" && playerTwoChoice==="s") {
 		playerOneLosses++;
 		playerTwoWins++;
-	} else if (playerOneChoice==="p" && playerTwoChoicee==="r") {
+	} else if (playerOneChoice==="p" && playerTwoChoice==="r") {
 		playerOneWins++;
 		playerTwoLosses++;
 	} else if (playerOneChoice==="s" && playerTwoChoice==="r") {
@@ -135,4 +141,9 @@ function updateResult() {
 	} else if (playerOneChoice==="s" && playerTwoChoice==="p") {
 		$("#result-area").html("<h1>Player One Wins!</h1>");
 	} 
+}
+
+function initializeRound() {
+	playerOneChoice = null;
+	playerTwoChoice = null;
 }
