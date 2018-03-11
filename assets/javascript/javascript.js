@@ -1,15 +1,28 @@
-// var config = {
-//     apiKey: "AIzaSyDq3SBPFSL4VFtVhMCqL-bFmd3ac0bd3sw",
-//     authDomain: "rock-paper-scissors-3dd59.firebaseapp.com",
-//     databaseURL: "https://rock-paper-scissors-3dd59.firebaseio.com",
-//     projectId: "rock-paper-scissors-3dd59",
-//     storageBucket: "",
-//     messagingSenderId: "426450353343"
-//   };
+/*
+PSEUDO CODE:
+-Create player objects with properties of name, wins, losses, and choice (which will reset every turn).
+-Create a "turn" variable which determines which player is actively picking 
+-The player object and turn variable should be connected to firebase
+-If turn variable = 1, then allow player 1 to choose and hide the result from player 2's screen
+-When the game initializes, it is player 1's turn, only once player 1 is finished can player 2 proceed
+-Use a setTimeOut to display the result for a few seconds, then initialize the game again
+-Create a chat box that both players can use and "submit" mini forms that will then append a new div into a box with their message
+*/
 
-// firebase.initializeApp(config);
+var config = {
+    apiKey: "AIzaSyDq3SBPFSL4VFtVhMCqL-bFmd3ac0bd3sw",
+    authDomain: "rock-paper-scissors-3dd59.firebaseapp.com",
+    databaseURL: "https://rock-paper-scissors-3dd59.firebaseio.com",
+    projectId: "rock-paper-scissors-3dd59",
+    storageBucket: "",
+    messagingSenderId: "426450353343"
+  };
 
-// var database = firebase.database();
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+var name = "";
 
 var playerOneChoice = null;
 var playerOneWins = 0;
@@ -20,8 +33,22 @@ var playerTwoWins = 0;
 var playerTwoLosses = 0;
 var ties = 0;
 
-//var choiceArray=["r","p","s"];
-//var computerChoice;
+$("#add-user").on("click", function() {
+	event.preventDefault();
+
+	name = $("#name-input").val().trim();
+
+	database.ref().set({
+		name: name
+	});
+});
+
+database.ref().on("value", function(snapshot) {
+	$("#welcome-area").html("<h2> Hello " + snapshot.val().name + "!</h2>");
+	$("#p1-name").text(snapshot.val().name);
+}, function(errorObject) {
+	console.log("Errors handled: " + errorObject.code);
+});
 
 $("#rock").on("click", function() {
 	playerOneChoice = "r";
@@ -78,7 +105,6 @@ $("#scissors2").on("click", function() {
 })
 
 function checkGame(playerOneChoice) {
-	//computerChoice = choiceArray[Math.floor(Math.random()*choiceArray.length)];
 
 	if (playerOneChoice === playerTwoChoice) {
 		ties++;
@@ -127,14 +153,14 @@ function updateResult() {
 	$("#ties-area").text(ties);
 
 	if (playerOneChoice === playerTwoChoice) {
-		ties++;
+		$("#result-area").html("<h1>Tie!</h1>");
 	} else if (playerOneChoice==="r" && playerTwoChoice==="p") {
 		$("#result-area").html("<h1>Player Two Wins!</h1>");
 	} else if (playerOneChoice==="r" && playerTwoChoice==="s") {
 		$("#result-area").html("<h1>Player One Wins!</h1>");
 	} else if (playerOneChoice==="p" && playerTwoChoice==="s") {
 		$("#result-area").html("<h1>Player Two Wins!</h1>");
-	} else if (playerOneChoice==="p" && playerTwoChoicee==="r") {
+	} else if (playerOneChoice==="p" && playerTwoChoice==="r") {
 		$("#result-area").html("<h1>Player One Wins!</h1>");
 	} else if (playerOneChoice==="s" && playerTwoChoice==="r") {
 		$("#result-area").html("<h1>Player Two Wins!</h1>");
